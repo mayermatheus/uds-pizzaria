@@ -7,18 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.uds.udspizzaria.application.service.TamanhoService;
-import br.com.uds.udspizzaria.presentation.dto.TamanhoDTO;
+import br.com.uds.udspizzaria.application.service.SaborService;
+import br.com.uds.udspizzaria.presentation.dto.SaborDTO;
 
 @RestController
-@RequestMapping("/tamanhos")
-public class TamanhoController {
-
+@RequestMapping("/sabores")
+public class SaborController {
 	@Autowired
-	protected TamanhoService tamanhoService;
+	protected SaborService saborService;
 	
 	@GetMapping
-	public List<TamanhoDTO> listar() {		
-		return this.tamanhoService.listarTodosComIdENome();
+	public List<SaborDTO> listar() {		
+		return this.saborService.listarTodosComIdENome();
 	}
 }
