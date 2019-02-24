@@ -19,6 +19,6 @@ public class TamanhoController {
 	
 	@GetMapping
 	public List<TamanhoDTO> listar() {		
-		return tamanhoService.listarTodosComIdENome();
+		return this.tamanhoService.listarTodosComIdENome();
 	}
 }
