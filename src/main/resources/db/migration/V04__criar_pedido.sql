@@ -1,0 +1,9 @@
+CREATE TABLE pedido (
+	id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+	valor_total DECIMAL(19,2) NOT NULL,
+	tempo_total_preparo INT NOT NULL,
+	tamanho BIGINT(20) NOT NULL,
+	sabor BIGINT(20) NOT NULL,
+	FOREIGN KEY (tamanho) REFERENCES tamanho(id),
+	FOREIGN KEY (sabor) REFERENCES sabor(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
