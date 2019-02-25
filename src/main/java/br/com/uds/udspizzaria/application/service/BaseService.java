@@ -13,7 +13,7 @@ import br.com.uds.udspizzaria.domain.service.BaseServiceInterface;
 public abstract class BaseService<T> implements BaseServiceInterface<T> {
     @Override
     public T buscar(Long id) {
-        T entidade = (T) this.getRepository().findById(id);
+        T entidade = this.getRepository().getOne(id);
 
         if (entidade == null) {
             throw new InformacaoNaoEncontradaException();
