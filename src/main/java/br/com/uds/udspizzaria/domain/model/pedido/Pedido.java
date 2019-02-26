@@ -34,7 +34,7 @@ public class Pedido implements Serializable {
 		this.pizza = pizza;
 		this.calcularTempoTotal();
 		this.tempoTotalPreparo = this.calcularTempoTotal();
-		this.valorTotal = this.calcularValorTotal();
+		this.calcularValorTotal();
 	}
 	
 	public Pedido() {}
@@ -66,8 +66,18 @@ public class Pedido implements Serializable {
 	public Integer calcularTempoTotal() {
 		return this.pizza.getTamanho().getTempoPreparo() + this.pizza.getSabor().getTempoAdicional();
 	}
-
-	public BigDecimal calcularValorTotal() {
-		return this.pizza.getTamanho().getValor();
+	
+	/**
+	 * Metodo responsável por realizar o calculo do valor total do pedido considerando:
+	 * O tamanho e os adicionais 
+	 */
+	public void calcularValorTotal() {
+		this.valorTotal = this.pizza.getTamanho().getValor();
+		this.pizza.getAdicionais()
+			.stream()
+			.filter(adicional -> adicional.getValorAdicional() != null)
+			.forEach(adicional -> {
+				this.valorTotal = this.valorTotal.add(adicional.getValorAdicional());
+			});
 	}
 }
