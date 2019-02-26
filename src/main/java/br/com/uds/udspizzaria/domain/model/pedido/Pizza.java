@@ -1,11 +1,17 @@
 package br.com.uds.udspizzaria.domain.model.pedido;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import br.com.uds.udspizzaria.domain.model.adicional.Adicional;
 import br.com.uds.udspizzaria.domain.model.sabor.Sabor;
 import br.com.uds.udspizzaria.domain.model.tamanho.Tamanho;
 
@@ -21,6 +27,12 @@ public class Pizza implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "sabor")
 	private Sabor sabor;
+	
+	@ManyToMany(cascade = CascadeType.REFRESH)
+	@JoinTable(name = "pedido_adicional",
+			joinColumns = { @JoinColumn(name = "pedido") },
+			inverseJoinColumns = {@JoinColumn(name = "adicional") })
+	private List<Adicional> adicionais = new ArrayList<Adicional>();
 
 	public Pizza(Tamanho tamanho, Sabor sabor) {
 		this.tamanho = tamanho;
@@ -29,8 +41,11 @@ public class Pizza implements Serializable {
 	
 	public Pizza() {}
 	
-	public Pizza(Tamanho tamanho) {
+	public Pizza(Tamanho tamanho, Sabor sabor, List<Adicional> adicionais) {
 		this.tamanho = tamanho;
+		this.sabor = sabor;
+		this.adicionais = adicionais;
+		System.out.println(adicionais.get(0).getNome());
 	}
 
 	public Tamanho getTamanho() {
@@ -47,5 +62,17 @@ public class Pizza implements Serializable {
 
 	public void setSabor(Sabor sabor) {
 		this.sabor = sabor;
+	}
+
+	public List<Adicional> getAdicionais() {
+		return adicionais;
+	}
+
+	public void setAdicionais(List<Adicional> adicionais) {
+		this.adicionais = adicionais;
+	}
+	
+	public void adicionarAdicionais(Adicional adicional) {
+		this.adicionais.add(adicional);
 	}
 }
