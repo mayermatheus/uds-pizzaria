@@ -1,7 +1,5 @@
 package br.com.uds.udspizzaria.domain.model.sabor;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,10 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "sabor")
-public class Sabor implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
+public class Sabor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -34,7 +29,7 @@ public class Sabor implements Serializable {
 	}
 
 	public Integer getTempoAdicional() {
-		return tempoAdicional;
+		return this.tempoAdicional == null ? Integer.valueOf(0) : this.tempoAdicional;
 	}
 
 	public void setTempoAdicional(Integer tempoAdicional) {
