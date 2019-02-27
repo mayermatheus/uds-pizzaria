@@ -1,7 +1,5 @@
 package br.com.uds.udspizzaria.application.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -18,10 +16,5 @@ public class AdicionalService extends BaseService<Adicional> implements Adiciona
 	@Override
 	protected JpaRepository<Adicional, Long> getRepository() {
 		return this.adicionalRepository;
-	}
-
-	@Override
-	public List<Adicional> buscarByIds(Iterable<Long> ids) {
-		return this.adicionalRepository.findAllById(ids);
 	}
 }
