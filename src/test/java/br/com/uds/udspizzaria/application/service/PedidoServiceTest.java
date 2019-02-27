@@ -24,7 +24,7 @@ import br.com.uds.udspizzaria.presentation.dto.PedidoDTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@TestPropertySource(properties = "application-test.properties")
+@TestPropertySource("classpath:application-test.properties")
 @EnableConfigurationProperties
 public class PedidoServiceTest {
 
