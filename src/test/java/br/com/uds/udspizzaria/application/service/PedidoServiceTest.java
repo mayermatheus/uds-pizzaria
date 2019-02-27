@@ -9,9 +9,7 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.uds.udspizzaria.domain.model.adicional.Adicional;
@@ -24,8 +22,6 @@ import br.com.uds.udspizzaria.presentation.dto.PedidoDTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@TestPropertySource("classpath:application-test.properties")
-@EnableConfigurationProperties
 public class PedidoServiceTest {
 
 	@Autowired
