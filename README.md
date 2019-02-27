@@ -1,7 +1,7 @@
 # uds-pizzaria
 Solução para o desafio proposto pela UDS tecnologia
 
-# desafio-despesas [![Build Status](https://travis-ci.org/jarddel/desafio-despesas.svg?branch=master)](https://travis-ci.org/jarddel/desafio-despesas)
+# desafio-despesas
 ### Utilização
 
 ```
