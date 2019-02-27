@@ -28,6 +28,12 @@ public class Adicional implements Serializable {
 	
 	@Column(name = "tempo_adicional")
 	private Integer tempoAdicional;
+	
+	public Adicional(Long id) {
+		this.id = id;
+	}
+	
+	public Adicional() {}
 
 	public String getNome() {
 		return nome;

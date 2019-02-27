@@ -32,8 +32,6 @@ public class Pedido implements Serializable {
 	
 	public Pedido(Pizza pizza) {
 		this.pizza = pizza;
-		this.calcularTempoTotal();
-		this.calcularValorTotal();
 	}
 	
 	public Pedido() {}

@@ -19,6 +19,12 @@ public class Sabor {
 	
 	@Column(name = "tempo_adicional")
 	private Integer tempoAdicional;
+	
+	public Sabor(Long id) {
+		this.id = id;
+	}
+	
+	public Sabor() {}
 
 	public String getNome() {
 		return nome;

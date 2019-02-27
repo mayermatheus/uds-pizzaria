@@ -10,6 +10,7 @@ import br.com.uds.udspizzaria.domain.service.PedidoServiceInterface;
 import br.com.uds.udspizzaria.infrastructure.persistence.hibernate.repository.PedidoRepositoryInterface;
 import br.com.uds.udspizzaria.presentation.assembler.PedidoAssembler;
 import br.com.uds.udspizzaria.presentation.dto.DetalhePedidoDTO;
+import br.com.uds.udspizzaria.presentation.dto.PedidoDTO;
 
 @Service
 public class PedidoService extends BaseService<Pedido> implements PedidoServiceInterface {
@@ -32,6 +33,17 @@ public class PedidoService extends BaseService<Pedido> implements PedidoServiceI
 		this.verificarPedidoExistente(pedido);
 		
 		return assembler.getDTO(pedido);
+	}
+	
+	@Override
+	public Pedido atualizar(Long id, PedidoDTO pedidoDTO) {
+		Pedido pedido = this.buscar(id);
+		pedido.getPizza().setAdicionais(pedidoDTO.getPizza().getAdicionais());
+		
+		pedido.calcularTempoTotal();
+		pedido.calcularValorTotal();
+
+		return super.salvar(pedido);
 	}
 	
 	/**
