@@ -1,17 +1,18 @@
 package br.com.uds.udspizzaria.presentation.dto;
 
-import java.math.BigDecimal;
+import javax.validation.constraints.NotNull;
 
 import br.com.uds.udspizzaria.domain.model.pedido.Pizza;
 
 final public class PedidoDTO {
+	@NotNull
 	private Pizza pizza;
 
 	public PedidoDTO(Pizza pizza) {
 		this.pizza = pizza;
 	}
 	
-	public PedidoDTO(Pizza pizza, Integer tempoTotal, BigDecimal valorTotal) {
+	public PedidoDTO(Pizza pizza, String teste) {
 		this.pizza = pizza;
 	}
 	
