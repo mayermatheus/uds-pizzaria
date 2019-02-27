@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import br.com.uds.udspizzaria.domain.model.adicional.Adicional;
 import br.com.uds.udspizzaria.domain.model.sabor.Sabor;
@@ -22,16 +23,19 @@ public class Pizza implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "tamanho")
+	@NotNull
 	private Tamanho tamanho;
 	
 	@ManyToOne
 	@JoinColumn(name = "sabor")
+	@NotNull
 	private Sabor sabor;
 	
 	@ManyToMany(cascade = CascadeType.REFRESH)
 	@JoinTable(name = "pedido_adicional",
 			joinColumns = { @JoinColumn(name = "pedido") },
 			inverseJoinColumns = {@JoinColumn(name = "adicional") })
+	@NotNull
 	private List<Adicional> adicionais = new ArrayList<Adicional>();
 
 	public Pizza(Tamanho tamanho, Sabor sabor) {
@@ -45,7 +49,6 @@ public class Pizza implements Serializable {
 		this.tamanho = tamanho;
 		this.sabor = sabor;
 		this.adicionais = adicionais;
-		System.out.println(adicionais.get(0).getNome());
 	}
 
 	public Tamanho getTamanho() {

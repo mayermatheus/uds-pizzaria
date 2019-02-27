@@ -1,5 +1,7 @@
 package br.com.uds.udspizzaria.application.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +29,12 @@ public class PedidoController {
 	private PedidoServiceInterface pedidoService;
 
 	@PostMapping
-	public ResponseEntity<Pedido> salvar(@RequestBody PedidoDTO pedido) {
+	public ResponseEntity<Pedido> salvar(@RequestBody @Valid PedidoDTO pedido) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(this.pedidoService.salvar(assembler.getEntity(pedido)));
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Pedido> atualizar(@PathVariable Long id, @RequestBody PedidoDTO pedido) {
+	public ResponseEntity<Pedido> atualizar(@PathVariable Long id, @Valid @RequestBody PedidoDTO pedido) {
 		return ResponseEntity.ok(this.pedidoService.atualizar(id, assembler.getEntity(pedido)));
 	}
 	

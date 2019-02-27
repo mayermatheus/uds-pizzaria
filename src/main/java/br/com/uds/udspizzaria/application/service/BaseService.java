@@ -1,6 +1,7 @@
 package br.com.uds.udspizzaria.application.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,13 +14,13 @@ import br.com.uds.udspizzaria.domain.service.BaseServiceInterface;
 public abstract class BaseService<T> implements BaseServiceInterface<T> {
     @Override
     public T buscar(Long id) {
-        T entidade = this.getRepository().getOne(id);
+        Optional<T> entidade = this.getRepository().findById(id);
 
-        if (entidade == null) {
+        if (!entidade.isPresent()) {
             throw new InformacaoNaoEncontradaException();
         }
 
-        return entidade;
+        return entidade.get();
     }
 
     @Override
