@@ -44,7 +44,7 @@ public class Adicional implements Serializable {
 	}
 
 	public BigDecimal getValorAdicional() {
-		return valorAdicional;
+		return this.valorAdicional == null ? BigDecimal.ZERO : this.valorAdicional;
 	}
 
 	public void setValorAdicional(BigDecimal valorAdicional) {
@@ -52,7 +52,7 @@ public class Adicional implements Serializable {
 	}
 
 	public Integer getTempoAdicional() {
-		return tempoAdicional;
+		return this.tempoAdicional == null ? Integer.valueOf(0) : this.tempoAdicional;
 	}
 
 	public void setTempoAdicional(Integer tempoAdicional) {

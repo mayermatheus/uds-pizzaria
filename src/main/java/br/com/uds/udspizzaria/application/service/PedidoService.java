@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import br.com.uds.udspizzaria.application.service.exception.InformacaoNaoEncontradaException;
 import br.com.uds.udspizzaria.application.service.exception.PedidoNaoEncontradoException;
 import br.com.uds.udspizzaria.domain.model.pedido.Pedido;
 import br.com.uds.udspizzaria.domain.service.PedidoServiceInterface;
 import br.com.uds.udspizzaria.infrastructure.persistence.hibernate.repository.PedidoRepositoryInterface;
 import br.com.uds.udspizzaria.presentation.assembler.PedidoAssembler;
 import br.com.uds.udspizzaria.presentation.dto.DetalhePedidoDTO;
-import br.com.uds.udspizzaria.presentation.dto.PedidoDTO;
 
 @Service
 public class PedidoService extends BaseService<Pedido> implements PedidoServiceInterface {
@@ -28,32 +28,28 @@ public class PedidoService extends BaseService<Pedido> implements PedidoServiceI
 
 	@Override
 	public DetalhePedidoDTO detalhar(Long id) {
-		Pedido pedido = this.pedidoRepository.getOne(id);
-		
-		this.verificarPedidoExistente(pedido);
-		
-		return assembler.getDTO(pedido);
+		try {
+			Pedido pedido = this.buscar(id);
+
+			return assembler.getDTO(pedido);
+		} catch (InformacaoNaoEncontradaException e) {
+			throw new PedidoNaoEncontradoException();
+		}
 	}
 	
 	@Override
-	public Pedido atualizar(Long id, PedidoDTO pedidoDTO) {
+	public Pedido atualizar(Long id, Pedido pedidoDTO) {
 		Pedido pedido = this.buscar(id);
 		pedido.getPizza().setAdicionais(pedidoDTO.getPizza().getAdicionais());
-		
-		pedido.calcularTempoTotal();
-		pedido.calcularValorTotal();
+		pedido.fechar();
 
 		return super.salvar(pedido);
 	}
 	
-	/**
-	 * Metodo responsável por verificar se este pedido já foi realizado
-	 * 
-	 * @param pedido
-	 */
-	private void verificarPedidoExistente(Pedido pedido) {
-		if (pedido == null) {
-			throw new PedidoNaoEncontradoException();
-		}
+	@Override
+	public Pedido salvar(Pedido pedido) {
+		pedido.fechar();
+		
+		return super.salvar(pedido);
 	}
 }

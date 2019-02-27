@@ -43,6 +43,12 @@ public class Pizza implements Serializable {
 		this.sabor = sabor;
 	}
 	
+	public Pizza(Tamanho tamanho, Sabor sabor, List<Adicional> adicionais) {
+		this.tamanho = tamanho;
+		this.sabor = sabor;
+		this.adicionais = adicionais;
+	}
+	
 	public Pizza() {}
 	
 	public Pizza(List<Adicional> adicionais) {

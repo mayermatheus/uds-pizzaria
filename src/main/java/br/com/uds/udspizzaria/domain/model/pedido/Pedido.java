@@ -65,12 +65,20 @@ public class Pedido implements Serializable {
 	}
 	
 	/**
+	 * Metodo responsável por fechar o pedido.
+	 */
+	public void fechar() {
+		this.calcularTempoTotal();
+		this.calcularValorTotal();
+	}
+	
+	/**
 	 * Metodo responsável por calcular o tempo total através:
 	 * Tempo de preparo do tamanho da pizza.
 	 * Tempo adicional do sabor da pizza
 	 * Tempo adicionais da personalização (Adicionais)
 	 */
-	public void calcularTempoTotal() {
+	private void calcularTempoTotal() {
 		this.tempoTotalPreparo = this.pizza.getTamanho().getTempoPreparo() + this.pizza.getSabor().getTempoAdicional();
 		this.pizza.getAdicionais()
 			.stream()
@@ -84,7 +92,7 @@ public class Pedido implements Serializable {
 	 * Metodo responsável por realizar o calculo do valor total do pedido considerando:
 	 * O tamanho e os adicionais 
 	 */
-	public void calcularValorTotal() {
+	private void calcularValorTotal() {
 		this.valorTotal = this.pizza.getTamanho().getValor();
 		this.pizza.getAdicionais()
 			.stream()

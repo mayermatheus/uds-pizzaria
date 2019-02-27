@@ -35,7 +35,7 @@ public class PedidoController {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Pedido> atualizar(@PathVariable Long id, @Valid @RequestBody PedidoDTO pedido) {
-		return ResponseEntity.ok(this.pedidoService.atualizar(id, pedido));
+		return ResponseEntity.ok(this.pedidoService.atualizar(id, assembler.getEntity(pedido)));
 	}
 	
 	@GetMapping("/{id}")

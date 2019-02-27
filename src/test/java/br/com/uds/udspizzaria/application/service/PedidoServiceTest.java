@@ -45,25 +45,26 @@ public class PedidoServiceTest {
         assertEquals(tempoPedidoTotal, pedidoSalvo.getTempoTotalPreparo());
     }
     
-//    @Test
-//    public void personalizarPedidoAdicionalExtraBacon() {
-//    	List<Adicional> adicionais = new ArrayList<Adicional>();
-//    	adicionais.add(new Adicional(1L));
-//    	
-//    	PedidoDTO pedido = new PedidoDTO(new Pizza(adicionais));
-//    	Pedido pedidoSalvo = this.pedidoService.atualizar(1L, pedido);
-//    	Tamanho tamanho = pedidoSalvo.getPizza().getTamanho();
-//    	Sabor sabor = pedidoSalvo.getPizza().getSabor();
-//    	Adicional adicional = pedidoSalvo.getPizza().getAdicionais().get(0);
-//    	
-//    	Integer tempoAdicional = adicional.getTempoAdicional();
-//    	Integer tempoPedidoTotal = sabor.getTempoAdicional() + tamanho.getTempoPreparo() + tempoAdicional;
-//    	BigDecimal valorPedidoTotal = tamanho.getValor().add(adicional.getValorAdicional());
-//    	
-//        assertEquals(new String("Calabresa"), pedidoSalvo.getPizza().getSabor().getNome());
-//        assertEquals(new String("Pequena"), pedidoSalvo.getPizza().getTamanho().getNome());
-//        
-//        assertEquals(valorPedidoTotal, pedidoSalvo.getValorTotal());
-//        assertEquals(tempoPedidoTotal, pedidoSalvo.getTempoTotalPreparo());
-//    }
+    @Test
+    public void personalizarPedidoComAdicionalExtraBacon() {
+    	List<Adicional> adicionais = new ArrayList<Adicional>();
+    	adicionais.add(new Adicional(1L));
+    	
+    	PedidoDTO pedido = new PedidoDTO(new Pizza(adicionais));
+    	Pedido pedidoSalvo = this.pedidoService.atualizar(1L, this.assembler.getEntity(pedido));
+
+    	Tamanho tamanho = pedidoSalvo.getPizza().getTamanho();
+    	Sabor sabor = pedidoSalvo.getPizza().getSabor();
+    	Adicional adicional = pedidoSalvo.getPizza().getAdicionais().get(0);
+    	
+    	Integer tempoAdicional = adicional.getTempoAdicional();
+    	Integer tempoPedidoTotal = sabor.getTempoAdicional() + tamanho.getTempoPreparo() + tempoAdicional;
+    	BigDecimal valorPedidoTotal = tamanho.getValor().add(adicional.getValorAdicional());
+    	
+        assertEquals(new String("Calabresa"), pedidoSalvo.getPizza().getSabor().getNome());
+        assertEquals(new String("Pequena"), pedidoSalvo.getPizza().getTamanho().getNome());
+        assertEquals(new String("Extra Bacon"), adicional.getNome());
+        assertEquals(valorPedidoTotal, pedidoSalvo.getValorTotal());
+        assertEquals(tempoPedidoTotal, pedidoSalvo.getTempoTotalPreparo());
+    }
 }
