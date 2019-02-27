@@ -36,8 +36,16 @@ public class PedidoAssembler {
 	 * @return Pedido
 	 */
 	public Pedido getEntity(PedidoDTO pedido) {
-		Tamanho tamanho = this.tamanhoService.buscar(pedido.getPizza().getTamanho().getId());
-		Sabor sabor = this.saborService.buscar(pedido.getPizza().getSabor().getId());
+		Tamanho tamanho = new Tamanho();
+		Sabor sabor = new Sabor();
+
+		if (pedido.getPizza().getTamanho() != null) {
+			tamanho = this.tamanhoService.buscar(pedido.getPizza().getTamanho().getId());
+		}
+		
+		if (pedido.getPizza().getTamanho() != null) {
+			sabor = this.saborService.buscar(pedido.getPizza().getSabor().getId());
+		}
 
 		List<Adicional> adicionais = pedido.getPizza().getAdicionais()
 		.stream()

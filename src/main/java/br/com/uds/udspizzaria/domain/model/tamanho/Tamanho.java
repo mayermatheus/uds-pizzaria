@@ -28,6 +28,12 @@ public class Tamanho implements Serializable {
 	
 	@Column(name = "tempo_preparo")
 	private Integer tempoPreparo;
+	
+	public Tamanho(Long id) {
+		this.id = id;
+	}
+	
+	public Tamanho() {}
 
 	public String getNome() {
 		return nome;
@@ -55,9 +61,5 @@ public class Tamanho implements Serializable {
 
 	public Long getId() {
 		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
 	}
 }
