@@ -1,7 +1,6 @@
 # uds-pizzaria
 Solução para o desafio proposto pela UDS tecnologia
 
-# desafio-despesas
 ### Utilização
 
 ```
@@ -13,23 +12,17 @@ $ mvn spring-boot:run
 ```
 
 ### Features adicionadas
-- OAuth2 com JWT (via profile)
-- BasicAuth (via profile)
 - ApiDoc (swagger2)
 - Migrations (FlyWay)
-- Mecanismo de cache (EhCache)
-- Pool de conexões (Hikari)
 
 ### Dependências
 - JDK 1.8+
-- Maven 3+
-- Spring 4+
+- Maven 4+
+- SpringBoot 2+
 - MySQL 5.7+
 
-### Escopo
-
 #### Recursos
-![Recursos](https://i.imgur.com/OYYy7QP.jpg)
+Para acessar os [Recursos](http://localhost:8080/swagger-ui.html) basta subir a aplicação.
 
 
 ### Possíveis Melhorias
