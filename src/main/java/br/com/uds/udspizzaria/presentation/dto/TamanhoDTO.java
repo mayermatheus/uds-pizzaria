@@ -18,10 +18,10 @@ final public class TamanhoDTO implements Serializable{
 	}
 
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
 }

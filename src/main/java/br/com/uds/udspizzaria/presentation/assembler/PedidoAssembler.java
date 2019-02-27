@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import br.com.uds.udspizzaria.application.service.SaborService;
 import br.com.uds.udspizzaria.application.service.TamanhoService;
@@ -14,10 +14,11 @@ import br.com.uds.udspizzaria.domain.model.pedido.Pizza;
 import br.com.uds.udspizzaria.domain.model.sabor.Sabor;
 import br.com.uds.udspizzaria.domain.model.tamanho.Tamanho;
 import br.com.uds.udspizzaria.domain.service.AdicionalServiceInterface;
+import br.com.uds.udspizzaria.presentation.dto.DetalhePedidoDTO;
 import br.com.uds.udspizzaria.presentation.dto.PedidoDTO;
 
-@Component
-public class CadastroPedidoAssembler {
+@Service
+public class PedidoAssembler {
 	@Autowired
 	private TamanhoService tamanhoService;
 	
@@ -26,7 +27,14 @@ public class CadastroPedidoAssembler {
 	
 	@Autowired
 	private AdicionalServiceInterface adicionalService;
-
+	
+	/**
+	 * Metodo responsávvel por retornar a entidade devidamente preenchida
+	 * através do DTO
+	 * 
+	 * @param PedidoDTO pedido
+	 * @return Pedido
+	 */
 	public Pedido getEntity(PedidoDTO pedido) {
 		Tamanho tamanho = this.tamanhoService.buscar(pedido.getPizza().getSabor().getId());
 		Sabor sabor = this.saborService.buscar(pedido.getPizza().getSabor().getId());
@@ -38,5 +46,24 @@ public class CadastroPedidoAssembler {
 		.collect(ArrayList<Adicional>::new, ArrayList::add, ArrayList::addAll);
 
 		return new Pedido(new Pizza(tamanho, sabor, adicionais));
+	}
+	
+	/**
+	 * Metodo responsável por retornar o DTO devidamente preenchido
+	 * através da entidade
+	 * 
+	 * @param pedido
+	 * @return
+	 */
+	public DetalhePedidoDTO getDTO(Pedido pedido) {
+		Pizza pizza = pedido.getPizza();
+
+		return new DetalhePedidoDTO(
+				pizza.getTamanho(),
+				pizza.getSabor(),
+				pizza.getAdicionais(),
+				pedido.getTempoTotalPreparo(),
+				pedido.getValorTotal()
+		);
 	}
 }
